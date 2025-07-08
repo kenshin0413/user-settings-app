@@ -24,14 +24,14 @@ struct ContentView: View {
             Spacer()
                 .navigationTitle("設定アプリ")
                 .toolbarTitleDisplayMode(.inline)
-            // アプリ起動時の処理
-                .onAppear {
-                    username = UserDefaults.standard.string(forKey: "username") ?? ""
-                }
+        }
+        // アプリ起動時の処理
+        .onAppear {
+            username = UserDefaults.standard.string(forKey: "username") ?? ""
         }
     }
 }
 
 #Preview {
-    ContentView(username: "")
+    ContentView()
 }
