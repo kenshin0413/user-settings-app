@@ -1,0 +1,32 @@
+{
+  "source": "/Users/kenshin/Desktop/user-settings-app/user-settings-app/user-settings-app/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "設定アプリ",
+        "location": {
+          "startingColumn": 74,
+          "startingLine": 31
+        }
+      },
+      {
+        "comment": "",
+        "key": "ユーザー名を入力してください",
+        "location": {
+          "startingColumn": 67,
+          "startingLine": 21
+        }
+      },
+      {
+        "comment": "",
+        "key": "保存",
+        "location": {
+          "startingColumn": 66,
+          "startingLine": 27
+        }
+      }
+    ]
+  },
+  "version": 1
+}

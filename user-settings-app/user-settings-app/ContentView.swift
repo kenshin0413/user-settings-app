@@ -8,17 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var username: String = ""
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                TextField("ユーザー名を入力してください", text: $username)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                Button {
+                    UserDefaults.standard.set(username, forKey: "username")
+                } label: {
+                    Text("保存")
+                }
+            }
+            Spacer()
+                .navigationTitle("設定アプリ")
+                .toolbarTitleDisplayMode(.inline)
+            // アプリ起動時の処理
+                .onAppear {
+                    username = UserDefaults.standard.string(forKey: "username") ?? ""
+                }
         }
-        .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(username: "")
 }
