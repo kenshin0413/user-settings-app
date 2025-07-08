@@ -1,3 +1,0 @@
-Target dependency graph (2 targets)
-Target 'user-settings-app' in project 'user-settings-app' (no dependencies)
-Target 'user-settings-app' in project 'user-settings-app' (no dependencies)
