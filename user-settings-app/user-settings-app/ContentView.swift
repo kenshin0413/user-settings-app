@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var username: String = ""
     @State var ageCount: Int = 20
+    let userDefaults = UserDefaults.standard
     var body: some View {
         NavigationStack {
             VStack(spacing: -10) {
@@ -23,11 +24,23 @@ struct ContentView: View {
                 .padding()
                 
                 Button {
-                    UserDefaults.standard.set(username, forKey: "username")
-                    UserDefaults.standard.set(ageCount, forKey: "ageCount")
+                    userDefaults.set(username, forKey: "username")
+                    userDefaults.set(ageCount, forKey: "ageCount")
                 } label: {
                     Text("保存")
                 }
+                .padding()
+                
+                Button {
+                    userDefaults.removeObject(forKey: "username")
+                    userDefaults.removeObject(forKey: "ageCount")
+                    username = ""
+                    ageCount = 0
+                } label: {
+                    Text("設定をリセット")
+                        .foregroundStyle(Color.red)
+                }
+                .padding()
             }
             Spacer()
                 .navigationTitle("設定アプリ")
@@ -35,8 +48,8 @@ struct ContentView: View {
         }
         // アプリ起動時の処理
         .onAppear {
-            username = UserDefaults.standard.string(forKey: "username") ?? ""
-            ageCount = UserDefaults.standard.integer(forKey: "ageCount")
+            username = userDefaults.string(forKey: "username") ?? ""
+            ageCount = userDefaults.integer(forKey: "ageCount")
         }
     }
 }
