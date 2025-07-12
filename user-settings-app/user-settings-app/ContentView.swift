@@ -34,7 +34,6 @@ struct ContentView: View {
                 }
                 .padding()
             }
-            Spacer()
                 .navigationTitle("設定アプリ")
                 .toolbarTitleDisplayMode(.inline)
             
@@ -45,6 +44,7 @@ struct ContentView: View {
                 .onChange(of: ageCount, initial: false) {
                     userDefaults.set(ageCount, forKey: "ageCount")
                 }
+            Spacer()
         }
         // アプリ起動時の処理
         .onAppear {
