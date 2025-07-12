@@ -24,14 +24,6 @@ struct ContentView: View {
                 .padding()
                 
                 Button {
-                    userDefaults.set(username, forKey: "username")
-                    userDefaults.set(ageCount, forKey: "ageCount")
-                } label: {
-                    Text("保存")
-                }
-                .padding()
-                
-                Button {
                     userDefaults.removeObject(forKey: "username")
                     userDefaults.removeObject(forKey: "ageCount")
                     username = ""
@@ -45,6 +37,14 @@ struct ContentView: View {
             Spacer()
                 .navigationTitle("設定アプリ")
                 .toolbarTitleDisplayMode(.inline)
+            
+                .onChange(of: username, initial: false) {
+                    userDefaults.set(username, forKey: "username")
+                }
+            
+                .onChange(of: ageCount, initial: false) {
+                    userDefaults.set(ageCount, forKey: "ageCount")
+                }
         }
         // アプリ起動時の処理
         .onAppear {
