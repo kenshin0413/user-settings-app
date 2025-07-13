@@ -13,37 +13,67 @@ struct ContentView: View {
     let userDefaults = UserDefaults.standard
     var body: some View {
         NavigationStack {
-            VStack(spacing: -10) {
-                TextField("ユーザー名を入力してください", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Stepper(value: $ageCount, in: 0...100, step: 1) {
-                    Text("年齢:\(ageCount)歳")
+            Form {
+                Section(header: Label("ユーザー情報", systemImage: "person.circle")) {
+                    Label {
+                        TextField("ユーザー名を入力してください", text: $username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    } icon: {
+                        Image(systemName: "person.fill")
+                    }
+                    Stepper(value: $ageCount, in: 0...100, step: 1) {
+                        Label {
+                            Text("年齢:\(ageCount)歳")
+                        } icon: {
+                            Image(systemName: "calendar")
+                                .foregroundStyle(Color.orange)
+                        }
+                    }
                 }
-                .padding()
                 
-                Button {
-                    userDefaults.removeObject(forKey: "username")
-                    userDefaults.removeObject(forKey: "ageCount")
-                    username = ""
-                    ageCount = 0
-                } label: {
-                    Text("設定をリセット")
-                        .foregroundStyle(Color.red)
+                Section(header: Label("現在の設定", systemImage: "eye")) {
+                    LabeledContent {
+                        Text(username)
+                    } label: {
+                        Label {
+                            Text("ユーザー名")
+                        } icon: {
+                            Image(systemName: "person.text.rectangle")
+                                .foregroundStyle(Color.green)
+                        }
+                    }
+                    LabeledContent {
+                        Text("\(ageCount)歳")
+                    } label: {
+                        Label {
+                            Text("年齢")
+                        } icon: {
+                            Image(systemName: "number")
+                                .foregroundStyle(Color.orange)
+                        }
+                    }
                 }
-                .padding()
+                
+                Section(header: Label("現在の設定", systemImage: "lock")) {
+                    Button {
+                        userDefaults.removeObject(forKey: "username")
+                        userDefaults.removeObject(forKey: "ageCount")
+                        username = ""
+                        ageCount = 0
+                    } label: {
+                        Label("設定をリセット", systemImage: "arrow.trianglehead.counterclockwise")
+                            .foregroundStyle(Color.red)
+                    }
+                }
             }
-                .navigationTitle("設定アプリ")
-                .toolbarTitleDisplayMode(.inline)
+            .navigationTitle("設定")
+            .onChange(of: username, initial: false) {
+                userDefaults.set(username, forKey: "username")
+            }
             
-                .onChange(of: username, initial: false) {
-                    userDefaults.set(username, forKey: "username")
-                }
-            
-                .onChange(of: ageCount, initial: false) {
-                    userDefaults.set(ageCount, forKey: "ageCount")
-                }
+            .onChange(of: ageCount, initial: false) {
+                userDefaults.set(ageCount, forKey: "ageCount")
+            }
             Spacer()
         }
         // アプリ起動時の処理
