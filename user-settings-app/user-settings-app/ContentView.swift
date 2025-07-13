@@ -74,7 +74,6 @@ struct ContentView: View {
             .onChange(of: ageCount, initial: false) {
                 userDefaults.set(ageCount, forKey: "ageCount")
             }
-            Spacer()
         }
         // アプリ起動時の処理
         .onAppear {
